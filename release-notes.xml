@@ -1,2 +1,5 @@
 <ReleaseNotes>
+  <ChangeSet>
+    <Change type="bug">Add automatic user group id generation</Change>
+  </ChangeSet>
 </ReleaseNotes>
