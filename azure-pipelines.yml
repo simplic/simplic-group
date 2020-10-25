@@ -32,10 +32,7 @@ steps:
       restoreSolution: "**/*.sln"
       feedsToUse: select
       vstsFeed: f7087ef5-bf6f-48b2-8b8b-5e513f4a7a9e
-  - task: MSBuild@1
-    inputs:
-      solution: "**/*.sln"
-      configuration: $(buildConfiguration)
+
   - ${{ if not(eq(variables['Build.Reason'], 'PullRequest')) }}:
       - template: version-number-update-template.yml@infrastructure
         parameters:
@@ -45,22 +42,27 @@ steps:
           branch_name:
             ${{ replace(variables['Build.SourceBranch'], 'refs/heads/', '')
             }}
+
+  - task: MSBuild@1
+    inputs:
+      solution: "**/*.sln"
+      configuration: $(buildConfiguration)
+
   - task: VSTest@2
     inputs:
-      testSelector: testAssemblies
-      testAssemblyVer2: '**\Simplic.Group.Test.dll
-
-        !**\*TestAdapter.dll
-
+      testSelector: "testAssemblies"
+      testAssemblyVer2: |
+        **\Simplic.Group.Test.dll
         !**\obj\**
-
-        '
+      searchFolder: "src"
+        
   - task: NuGetCommand@2
     inputs:
       command: pack
       packagesToPack: src/Simplic.Group**/*.csproj;!src/Simplic.Group.Test/Simplic.Group.Test.csproj
       configuration: $(buildConfiguration)
       versioningScheme: "off"
+
   - task: NuGetCommand@2
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     inputs:
