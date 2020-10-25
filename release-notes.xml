@@ -1,5 +1,5 @@
 <ReleaseNotes>
-  <ChangeSet>
+  <ChangeSet guid="18b10c0e-81e1-46ae-b27b-070785e66a7b">
     <Change type="bug">Add automatic user group id generation</Change>
   </ChangeSet>
 </ReleaseNotes>
