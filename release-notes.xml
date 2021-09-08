@@ -2,4 +2,7 @@
   <ChangeSet guid="18b10c0e-81e1-46ae-b27b-070785e66a7b">
     <Change type="bug">Add automatic user group id generation</Change>
   </ChangeSet>
+  <ChangeSet>
+    <Change type="feature">Upgrade from SAP Sybase Sql Anywhere 12 to SAP Sybase Sql Anywhere 17.</Change>
+  </ChangeSet>
 </ReleaseNotes>
