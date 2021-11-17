@@ -37,6 +37,13 @@ namespace Simplic.Group
         IEnumerable<Group> GetAllByUserId(int userId);
 
         /// <summary>
+        /// Gets a list of user ids of a group
+        /// </summary>
+        /// <param name="groupIdent"></param>
+        /// <returns></returns>
+        IEnumerable<int> GetUserIdsByGroupIdent(int groupIdent);
+
+        /// <summary>
         /// Gets a group given by its id
         /// </summary>
         /// <param name="id">Id of the group to search</param>
