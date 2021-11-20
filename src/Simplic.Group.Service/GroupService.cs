@@ -98,6 +98,23 @@ namespace Simplic.Group.Service
         }
         #endregion
 
+        #region [GetUserIdsByGroupId]
+        /// <summary>
+        /// Gets a list of user ids of a group
+        /// </summary>
+        /// <param name="groupIdent"></param>
+        /// <returns></returns>
+        public IEnumerable<int> GetUserIdsByGroupIdent(int groupIdent)
+        {
+            return sqlService.OpenConnection((connection) =>
+            {
+                return connection.Query<int>(
+                    $"SELECT UserId FROM {UserAssignmentTableName} ua join {GroupTableName} g on ua.GroupId = g.GroupId " +
+                    $"WHERE g.Ident = :groupIdent order by UserId", new { groupIdent });
+            });
+        }
+        #endregion
+
         #region [GetById]
         /// <summary>
         /// Gets a group given by its id
