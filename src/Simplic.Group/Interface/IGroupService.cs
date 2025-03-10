@@ -5,14 +5,14 @@ namespace Simplic.Group
     public interface IGroupService
     {
         /// <summary>
-        /// Deletes a group
+        /// Deactivates a group
         /// </summary>
         /// <param name="id">Ident to be deleted.</param>
         /// <returns>True if successfull</returns>
         bool Delete(int id);
 
         /// <summary>
-        /// Deletes a group
+        /// Deactivates a group
         /// </summary>
         /// <param name="groupId">Group Id to be deleted.</param>
         /// <returns>True if successfull</returns>

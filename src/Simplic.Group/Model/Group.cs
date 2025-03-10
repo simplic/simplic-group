@@ -21,5 +21,10 @@
         /// Gets or sets if the group is the default group
         /// </summary>
         public bool IsDefaultGroup { get; set; }
+
+        /// <summary>
+        /// Gets or sets if the group is active.
+        /// </summary>
+        public bool IsActive { get; set; }
     }
 }
