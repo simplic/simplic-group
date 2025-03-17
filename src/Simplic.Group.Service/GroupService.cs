@@ -33,7 +33,7 @@ namespace Simplic.Group.Service
         {
             return sqlService.OpenConnection((connection) =>
             {
-                var affectedRows = connection.Execute($"DELETE FROM {GroupTableName} WHERE Ident = :Ident", new { Ident = id });
+                var affectedRows = connection.Execute($"UPDATE {GroupTableName} SET IsActive = :isActive WHERE Ident = :Ident", new { isActive = false, Ident = id });
                 return affectedRows > 0;
             });
         }
@@ -49,7 +49,7 @@ namespace Simplic.Group.Service
         {
             return sqlService.OpenConnection((connection) =>
             {
-                var affectedRows = connection.Execute($"DELETE FROM {GroupTableName} WHERE GroupId = :GroupId", new { GroupId = groupId });
+                var affectedRows = connection.Execute($"UPDATE {GroupTableName} SET IsActive = :isActive WHERE GroupId = :GroupId", new { isActive = false, GroupId = groupId });
 
                 return affectedRows > 0;
             });
@@ -93,7 +93,7 @@ namespace Simplic.Group.Service
             {
                 return connection.Query<Group>(
                     $"SELECT g.* FROM {UserAssignmentTableName} ua join {GroupTableName} g on ua.GroupId = g.GroupId " +
-                    $"WHERE ua.UserId = :userId order by g.GroupId", new { userId });
+                    $"WHERE ua.UserId = :userId", new { userId });
             });
         }
         #endregion
@@ -150,8 +150,8 @@ namespace Simplic.Group.Service
 
 
                 var affectedRows = connection.Execute($"INSERT INTO {GroupTableName} " +
-                    $"(Ident, Name, GroupId, IsDefaultGroup) "
-                     + " ON EXISTING UPDATE VALUES (:Ident, :Name, :GroupId, :IsDefaultGroup)", group);
+                    $"(Ident, Name, GroupId, IsDefaultGroup, IsActive) "
+                     + " ON EXISTING UPDATE VALUES (:Ident, :Name, :GroupId, :IsDefaultGroup, :isActive)", group);
 
                 return affectedRows > 0;
             });
